@@ -1,0 +1,10 @@
+@startuml
+class Date {
+    -year : int
+    -month : int
+    -day : int
+    +Date(year, month, day)
+    +stepDay()
+    +getDate() : date
+}
+@enduml
