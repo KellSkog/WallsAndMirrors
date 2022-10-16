@@ -1,0 +1,66 @@
+'An association indicated by the solid line with no arrowheads
+'show that the classes know about each other.
+'Aggregation aka containment indicated by open diamond arrowhead near the containing class
+'show that one class contains an instance of another class: independent lifetime.
+'Composition uses a filled-in diamond arrowhead near the containing class
+'is a stronger form of aggregation; the lifetimes
+'of the container and the contained objects are the same.
+'- private          Extension	<|--		
+'# protected        Composition	*--
+'~ package private  Aggregation	o--
+'+ public
+'replacing -- by .. gives a dotted line.
+
+'abstract        abstract
+'abstract class  "abstract class"
+'annotation      annotation
+'circle          circle
+'()              circle_short_form
+'class           class
+'diamond         diamond
+'<>              diamond_short_form
+'entity          entity
+'enum            enum
+'interface       interface
+'protocol        protocol
+'struct          struct
+@startuml
+class Bank {
+    -name : string
+    -routingNum : int
+    +createAccount()
+}
+class Customer {
+    -name : string
+    -address : string
+    +getName() string
+    +changeName(newName string)
+    +getAddress() string
+    +changeAddress(newAddress string)
+}
+
+abstract class Account {
+    -accountNum int
+    -balance float
+    +getBalance() float
+    +withdraw(accountNum, amount) bool
+    +deposit(accountNum int, amount float) bool
+}
+class Checking {
+    -chargePerCheck: float
+    -numCheck: integer
+    -minBalance: float
+    +getBalance(): float 
+}
+class Savings {
+    -interestRate: float
+    -accrueInterest()
+    +getBalance(): float
+}
+
+Bank o-d- Account
+Customer "o..* " -l- " 1" Bank
+Account "0..*" -r-o "1" Customer
+Checking -u-|> Account
+Savings -u-|> Account
+@enduml
