@@ -42,6 +42,7 @@ class Customer {
 abstract class Account {
     -accountNum int
     -balance float
+    -logTransaction(type)
     +getBalance() float
     +withdraw(accountNum, amount) bool
     +deposit(accountNum int, amount float) bool
@@ -57,10 +58,18 @@ class Savings {
     -accrueInterest()
     +getBalance(): float
 }
-
+'Add a Transaction class to the banking example in Figure C-4 of Appendix C. This class keeps track of the
+'date, time, amount, and type of transaction (checking or savings). 
+class Transaction {
+    -date date
+    -time time
+    -amount float
+    -transactionType Enum
+}
 Bank o-d- Account
 Customer "o..* " -l- " 1" Bank
 Account "0..*" -r-o "1" Customer
+Account -u- Transaction
 Checking -u-|> Account
 Savings -u-|> Account
 @enduml
